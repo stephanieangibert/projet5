@@ -1,0 +1,154 @@
+@font-face {
+    font-family: 'digory_doodlesregular';
+    src: url('digory_doodles_ps-webfont.eot');
+    src: url('digory_doodles_ps-webfont.eot') format('embedded-opentype'),
+         url('digory_doodles_ps-webfont.woff') format('woff'),
+         url('digory_doodles_ps-webfont.ttf') format('truetype'),
+         url('digory_doodles_ps-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body{
+    background-color: black;
+}
+
+
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+}
+li{
+    list-style: none;
+    margin-left: 8%;
+    font-size: 150%;   
+    width: 116px;
+    height: 40px;
+    text-align: center;
+    padding-top: 0.4%;
+    border-top-left-radius:25px;
+    border-top-right-radius:25px;
+
+}
+ a{
+    
+    list-style-type: none;
+    text-decoration: none;
+    color: white;
+}
+.accueil{
+    background-color: red;
+}
+.recettes{
+    background-color: teal;
+}
+.inscription{
+    background-color:greenyellow;
+}
+.connexion{
+    background-color:orange;
+}
+.profil{
+    background-color: yellow;
+}
+h1{
+    font-family:'digory_doodlesregular';
+    text-align: center;
+    padding-top: 5%;
+    font-size: 222%;
+    color: white;
+    height: 132px;
+}
+#chapitres{
+    text-align: center;
+    color: white;
+    border: solid white;
+}
+.ingredients{
+    background-color: grey;
+    width: 400px;
+    margin: 0 auto;
+    height: 40px;    
+    padding-top: 2%;
+}
+#chapitres a{
+    color:red;
+  
+    
+}
+.comment{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: baseline;
+    font-size: 120%;
+    padding-right: 6%;
+}
+.fa-thumbs-up{
+    color:red;
+    padding-left: 45%;
+    font-size: 120%;
+}
+.ajout{
+    color: white;
+    text-align: center;
+    font-size: 120%; 
+    font-family:'digory_doodlesregular';
+}
+form
+{
+    text-align: center;
+}
+p.ajout{
+    height: 30px;
+}
+#submit{
+    background-color: red;
+    color:white;
+    font-weight: bold;
+    margin-left: 30%;
+    margin-top: 2%;
+    padding: 0.5%;
+    border-radius: 15%;
+}
+select{
+    margin-top: 2%;
+}
+td{
+    color:white;
+}
+#inscription {
+    /* Uniquement centrer le formulaire sur la page */
+    margin: 0 auto;
+    width: 500px;
+    /* Encadré pour voir les limites du formulaire */
+    padding: 3em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+    color:white;
+    font-weight: bold;
+  }
+  label {
+    /* Pour être sûrs que toutes les étiquettes ont même taille et sont correctement alignées */
+    display: inline-block;
+    width: 110px;
+    text-align: right;
+    padding: 0.5em;
+    color:white;
+  }
+  #submit2{
+      background-color: blue;
+      color:white;
+      margin-left: 42%;
+      margin-top: 3%;
+      padding: 1%;
+      border-radius:10%;
+  }
+  #ava{
+      padding-left: 12%;
+      padding-top: 3%;
+  }
+  

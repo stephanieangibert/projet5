@@ -1,0 +1,11 @@
+{
+    "name": "P5_Angibert_Stephanie/ons",
+    "require": {},
+	"autoload": {
+		"psr-4" : {
+		"app\\" : "app"}
+	}
+}
+
+
+

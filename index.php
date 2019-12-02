@@ -3,7 +3,8 @@ require 'vendor/autoload.php';
 use app\model\Manager;
 use app\model\MemberManager;
 use app\model\PostManager;
-require('controller/frontend.php');
+use controller;
+//require('controller/frontend.php');
 //require('controller/backend.php');
 try {
     if (isset($_GET['action'])) {

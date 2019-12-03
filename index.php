@@ -1,10 +1,10 @@
 <?php
-require 'vendor/autoload.php';
+/* require 'vendor/autoload.php';
 use app\model\Manager;
 use app\model\MemberManager;
 use app\model\PostManager;
-use controller;
-//require('controller/frontend.php');
+ */
+ require('controller/frontend.php');
 //require('controller/backend.php');
 try {
     if (isset($_GET['action'])) {

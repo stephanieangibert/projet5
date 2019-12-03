@@ -11,12 +11,13 @@ class MemberManager extends Manager
     $mailexist = $reqmail->rowCount();
     return $mailexist;
 }
-public function member($pseudo, $mail, $mdp,$admin)
+public function member($pseudo, $mail, $mdp,$admin,$avatar)
 {  
     $db = $this->dbConnect();
     $admin=0;
-    $insertmbr = $db->prepare("INSERT INTO users(pseudo, email, password,admin) VALUES(?, ?, ?,?)");
-    $insertmbr->execute(array($pseudo, $mail, $mdp,$admin));  
+    $avatar="";
+    $insertmbr = $db->prepare("INSERT INTO users(pseudo, email, password,admin,avatar) VALUES(?, ?, ?,?,?)");
+    $insertmbr->execute(array($pseudo, $mail, $mdp,$admin,$avatar));  
     return  $insertmbr; 
           
 }

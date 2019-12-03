@@ -1,7 +1,9 @@
 <?php
 //require_once("model/Manager.php");
-
 namespace app\model; 
+require 'vendor/autoload.php';
+use app\model\Manager;
+
 class PostManager extends Manager
 {
     public function getPosts()

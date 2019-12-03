@@ -2,6 +2,7 @@
 session_start();
 //require_once('model/PostManager.php'); 
 //require_once('model/MemberManager.php'); 
+require 'vendor/autoload.php';
 use app\model\Manager;
 use app\model\MemberManager;
 use app\model\PostManager;
@@ -35,6 +36,7 @@ function subscribe()
       $mdp=$_POST['password'];
       $mdp1=$_POST['pass1'];
       $admin=0;
+      $avatar="";
     
       if(!empty($_POST['pseudo']) AND !empty($_POST['email']) AND !empty($_POST['password']) AND !empty($_POST['pass1'])) {
          $pseudolength = strlen($pseudo);
@@ -49,7 +51,7 @@ function subscribe()
                         if(preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$#', $mdp)){
                        $mdp= password_hash($_POST['password'], PASSWORD_DEFAULT);
                        $mdp1 = password_hash($_POST['pass1'], PASSWORD_DEFAULT);                                     
-                       $insertmbr=$memberM->member($pseudo, $mail, $mdp,$admin);                
+                       $insertmbr=$memberM->member($pseudo, $mail, $mdp,$admin,$avatar);                
                        $erreur = "Votre compte a bien été créé !"; 
                        $_SESSION['pseudo']=$mailexist['pseudo'];
                      }        

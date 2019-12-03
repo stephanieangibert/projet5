@@ -15,8 +15,7 @@
 <li class="accueil"><a href="accueil">Accueil</a></li>
 <li class="recettes"><a href="recettes">Recettes</a></li>
 <li class="profil"><a href="index.php?action=profil">Profil</a></li>
-<li class="inscription"><a href="index.php?action=subscribe">Inscription</a></li>
-<li class="connexion"><a href="connexion">Connexion</a></li>
+<li class="inscription"><a href="index.php?action=subscribe">Connexion</a></li>
 </ul>
 </nav>
 <h1>Le blog de Joce</h1>

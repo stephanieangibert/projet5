@@ -122,6 +122,17 @@ td{
 }
 #inscription {
     /* Uniquement centrer le formulaire sur la page */
+    margin: 2% auto;
+    width: 500px;
+    /* Encadré pour voir les limites du formulaire */
+    padding: 3em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+    color:white;
+    font-weight: bold;
+  }
+  #connexion {
+    /* Uniquement centrer le formulaire sur la page */
     margin: 0 auto;
     width: 500px;
     /* Encadré pour voir les limites du formulaire */
@@ -130,6 +141,10 @@ td{
     border-radius: 1em;
     color:white;
     font-weight: bold;
+    position: absolute;
+    left:30%;
+    top:60%;
+
   }
   label {
     /* Pour être sûrs que toutes les étiquettes ont même taille et sont correctement alignées */
@@ -150,5 +165,48 @@ td{
   #ava{
       padding-left: 12%;
       padding-top: 3%;
+  }
+  #bouton{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 600px;
+      margin: 0% auto;
+      
+  }
+  #connex{
+      color:white;
+      font-weight: bold;
+      font-size: 120%;
+      padding-top: 2%;
+      width: 222px;
+      border: solid white;
+      text-align: center;
+      height: 45px;
+      background-color:blue; 
+    
+      
+  }
+  #inscrip{
+    color:white;
+    font-weight: bold;
+    font-size: 120%;
+    padding-top: 2%;
+    width: 222px;
+    border: solid white;
+    text-align: center;
+    height: 45px;
+    background-color: red;
+  
+
+  }
+  #submit3{
+    background-color:red;
+    color:white;
+    margin-left: 42%;
+    margin-top: 3%;
+    padding: 1%;
+    border-radius:10%;
+
   }
   

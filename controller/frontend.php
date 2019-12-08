@@ -1,4 +1,4 @@
-<?php
+ <?php
 session_start();
 //require_once('model/PostManager.php'); 
 //require_once('model/MemberManager.php'); 
@@ -11,18 +11,34 @@ use app\model\PostManager;
 function listPosts()
 {
     $managerP=new PostManager();
-    $posts=$managerP->getPosts();
+    $posts=$managerP->getPosts();    
+    $nbrRecipe=$managerP->totalRecipes();   
+    $RecipePerPage =2;
+    $allPages = ceil($nbrRecipe/$RecipePerPage);
+  
+    if(isset($_GET['listPosts']) AND !empty($_GET['listPosts']) AND $_GET['listPosts'] > 0 AND $_GET['listPosts'] <= $allPages) {
+      $_GET['listPosts'] = intval($_GET['listPosts']);
+      $currentPage = $_GET['listPosts'];
+   } else {
+      $currentPage = 1;
+   }   
+    
+    $begin = ($currentPage-1)*$RecipePerPage;
     require('view/frontend/listPostsView.php');
     
 }
-function addPost(){
-    if(isset($_POST['submit'])){
+function addRecipe(){
+    if(isset($_POST['submitAdd'])){
         $title=htmlspecialchars($_POST['title']);
-        $ingredrients=htmlspecialchars($_POST['ingredrients']);
-        $content=htmlspecialchars($_POST['content']);
-        if(!empty($title)&&!empty($ingredrients)&&!empty($content)){
-            $Post=new postManager();
-            $req=$Post->getsPots();
+        $ingredients=htmlspecialchars($_POST['ingredients']);
+        $content=htmlspecialchars($_POST['content']); 
+        $id_user=$_SESSION['pseudo'];
+        $love=0;
+        //$category=$_POST['category'];
+      
+        if(!empty($title)&&!empty($ingredients)&&!empty($content)){
+            $Post=new PostManager();
+            $addReci=$Post->add($title,$ingredients,$content,$id_user,$love);
         }
     }
     require('view/frontend/listPost.php');
@@ -53,7 +69,7 @@ function subscribe()
                        $mdp1 = password_hash($_POST['pass1'], PASSWORD_DEFAULT);                                     
                        $insertmbr=$memberM->member($pseudo, $mail, $mdp,$admin,$avatar);                
                        $erreur = "Votre compte a bien été créé !"; 
-                       $_SESSION['pseudo']=$mailexist['pseudo'];
+                      
                      }        
                        
                                       
@@ -77,10 +93,124 @@ function subscribe()
          $erreur = "Tous les champs doivent être complétés !";
       }
 
-   }        
+   }  
+   require('view/frontend/subscribe.php');
+   }  
      
-     require('view/frontend/subscribe.php');
-}
+    
+
+
 function profil(){
+   if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name'])) {
+      $tailleMax = 2097152;
+      $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
+       $email=htmlspecialchars($_POST['email']);
+            $pseudo=htmlspecialchars($_POST['pseudo']);
+            $pass=$_POST['password'];
+            $mdp1=$_POST['pass1']; 
+            $admin=0; 
+            $id=$_SESSION['id'];  
+            if ($pass==$mdp1) {
+               $pass= password_hash($_POST['password'], PASSWORD_DEFAULT);
+               $mdp1 = password_hash($_POST['pass1'], PASSWORD_DEFAULT);  
+               if($_FILES['avatar']['size'] <= $tailleMax) {
+                  $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+                  if(in_array($extensionUpload, $extensionsValides)) {
+                     $chemin = "member/avatars/".$_SESSION['id'].".".$extensionUpload;
+                     $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
+                     if($resultat) {
+                        $avatar=$_SESSION['id'].".".$extensionUpload;
+                         $updPro= new MemberManager();
+                         $updProf=$updPro->update($pseudo,$email,$pass,$admin,$avatar,$id);
+                        //header('Location: profil.php?id='.$_SESSION['id']);
+                     } else {
+                        $msg = "Erreur durant l'importation de votre photo de profil";
+                     }
+                  } else {
+                     $msg = "Votre photo de profil doit être au format jpg, jpeg, gif ou png";
+                  }
+
+            } 
+      
+      }else{
+         $msg = "Votre photo de profil ne doit pas dépasser 2Mo";
+      }
+   }
+        else {
+           $msg = "Vos mots de passe doivent être identiques";
+       
+      } 
+      
+  
+}
+function connexion()
+{
+   if(isset($_POST['submit2'])){     
+      $mailconnect = htmlspecialchars($_POST['email']);   
+      $mdpconnect=htmlspecialchars($_POST['password']); 
+        if(isset($mailconnect) AND !empty($mdpconnect)) {    
+           $memberM=new MemberManager();
+
+         $userexist= $memberM->mailConnex($mailconnect);        
+                      
+                 if($userexist->rowCount() == 1) {                
+               
+                 $userinfo=$userexist->fetch();
+                  if(password_verify($mdpconnect,$userinfo['password'])){               
+                     $_SESSION['pseudo'] = $userinfo['pseudo'];                   
+                     $_SESSION['id']=$userinfo['id']; 
+                     $_SESSION['admin']=$userinfo['admin'];
+                     $_SESSION['email']=$userinfo['email'];                
+                   
+                    
+                  }  
+                 
+                  else{ 
+                   $erreur='Mauvais mail ou mot de passe !';             
+             
+                  }                                
+      
+                } else {
+                  $erreur="Mauvais mail ou mot de passe !"; 
+              
+                
+                 }
+            
+           
+                } else {
+                  $erreur="Tous les champs doivent être complétés !"; 
+                
+    }  
+
+require('view/frontend/subscribe.php');
+}
+}
+function changeProfile($id){
+   $profil= new MemberManager();
+      $Prof=$profil->profile($id);
+      $msg="";
    require('view/frontend/profile.php');
+
+}
+function addComment($id){
+   $post=new PostManager();
+   $postCom=$post->getPost($id);
+   require('view/frontend/listComments.php');
+}
+function heart($id){
+   if(!empty($_SESSION['peudo'])){
+      $playing = true;
+      if ($playing) {
+         $postAlo=new PostManager();
+         $postAlov=$postAlo->addLove($id);
+     } else {
+      $postMin=new PostManager();
+      $postMinus=$postMin->minLove($id);
+     }
+    $playing=!$playing;
+      
+   }
+   
+ 
+   header('location:index.php'); 
 }

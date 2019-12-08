@@ -1,14 +1,14 @@
 <?php ob_start();?>
 
-<form>
+<form method="post" action="">
 <p class="ajout">Le titre</p> 
 <input type="text" name="title"></input> 
 <br> 
-<select name="choix">
+ <select name="category">
     <option value="entree">Entrée</option>
     <option value="plat">Plat</option>
     <option value="dessert">Dessert</option>    
-</select>
+</select> 
 <p class="ajout">Donnez-moi vos ingrédients</p>
 <textarea type="text" name="ingredients" id="ing" rows="20" cols="50" ></textarea>
 <p class="ajout">Donnez-moi votre recette</p>

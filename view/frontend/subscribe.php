@@ -25,10 +25,12 @@
     <input type="submit" name="submit" value="envoyer" id="submit2">
     <br>
     <br>
-    <?php
-               if(isset($erreur)){
-    echo '<font color="white">'. $erreur.'</font>'; }?> 
-         </form>      
+    <?php 
+         if(isset($erreur)){
+            echo '<font color="white">'. $erreur.'</font>'; }?>     
+               
+         </form> 
+        
 <form action="" method="post" id="connexion">
 <div>
         <label for="mail">e-mail :</label>
@@ -38,7 +40,7 @@
         <label for="mdp">Mot de passe :</label>
         <input type="password" id="mdp" name="password" placeholder="6 caractères">        
     </div>
-    <input type="submit" name="submit" value="envoyer" id="submit3">
+    <input type="submit" name="submit2" value="envoyer" id="submit3">
 
 </form>
 <script src="public/js/signInUp.js"> </script>

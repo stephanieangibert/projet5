@@ -11,6 +11,13 @@ class MemberManager extends Manager
     $mailexist = $reqmail->rowCount();
     return $mailexist;
 }
+public function profile($id){
+    $db = $this->dbConnect();
+    $reqprof=$db->prepare("SELECT * FROM users WHERE id = ?");
+    $reqprof->execute(array($id));
+    return $reqprof;
+
+}
 public function member($pseudo, $mail, $mdp,$admin,$avatar)
 {  
     $db = $this->dbConnect();
@@ -21,4 +28,20 @@ public function member($pseudo, $mail, $mdp,$admin,$avatar)
     return  $insertmbr; 
           
 }
+public function mailConnex($mailconnect)
+{   
+    $db = $this->dbConnect();
+    $requser = $db->prepare("SELECT * FROM users WHERE email = ?");
+    $requser->execute(array($mailconnect));    
+    return $requser; 
+    
+} 
+public function update($pseudo,$email,$pass,$admin,$avatar,$id){
+    $db = $this->dbConnect();
+    $squpd= $db->prepare("UPDATE users SET pseudo = ?,email = ?,password = ?,admin = ?,avatar = ? WHERE id = ?");   
+    $upd=$squpd->execute(array($pseudo,$email,$pass,$admin,$avatar,$id));
+    return $upd;                    
+
+}
+
 }

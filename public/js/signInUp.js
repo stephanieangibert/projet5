@@ -9,6 +9,7 @@ document.getElementById("connex").addEventListener('click', this.connexion.bind(
 document.getElementById("inscrip").addEventListener('click', this.subscribe.bind(this));
 
 
+
 }
 connexion(){ 
     document.getElementById("connexion").style.visibility="visible";
@@ -24,9 +25,7 @@ subscribe(){
     this.logVisib= document.getElementById("connex").style.visibility="visible";
 
 }
-if (signIn){
 
-}
 
 }
 var intro=new Sign();

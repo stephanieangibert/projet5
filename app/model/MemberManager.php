@@ -43,5 +43,11 @@ public function update($pseudo,$email,$pass,$admin,$avatar,$id){
     return $upd;                    
 
 }
+public function allUsers(){
+    $db = $this->dbConnect();
+    $reqU=$db->query('SELECT * FROM users');
+    return $reqU;
+
+}
 
 }

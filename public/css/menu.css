@@ -236,6 +236,7 @@ td{
   .pagination{
       margin-top: 2%;
       text-align: center;
+     
   }
   .pagination a{
     padding-left: 1%;
@@ -244,9 +245,11 @@ td{
     border-radius:8%;
     text-align: center;
   }
+  
   .pagination a:hover{
       color: black;
       background-color: white;
+      border: white;
   }
   .pagination font{
     padding-left: 1%;
@@ -255,4 +258,47 @@ td{
     border-radius:8%;
     text-align: center;
 
+  }
+  #averti{
+      position: absolute;
+      top:65%;
+      left: 40%;
+      border: solid white;
+      padding: 2%;
+      border-bottom-right-radius: 40px;
+	  border-top-right-radius: 40px;
+	  border-bottom-left-radius: 40px;
+	  border-top-left-radius: 40px;
+  }
+  .photoRe{
+      width: 70%;
+      height: 200px;
+  }
+  .photoBack{
+      width: 25%;
+  }
+  th{
+      color: white;
+      background-color: red;
+  }
+  td{
+      border: solid white;
+      text-align: center;
+  }
+  .btn1{
+      width: 30px;
+      color:white;
+      background-color: red;
+  }
+  .btn2{
+    width: 30px;
+    color:white;
+    background-color: green;
+
+  }
+  #pdp{
+      color:white;
+  }
+  .pdp1{
+    color:white;
   }

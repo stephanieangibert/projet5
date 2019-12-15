@@ -13,21 +13,40 @@
  
 </head>
 <body>
-  
-<nav><ul>
+ <?php var_dump($_SESSION['admin']);
+       var_dump($_SESSION['pseudo']);
+
+ if($_SESSION['admin']==1){
+   echo'<nav><ul>
+   <li class="accueil"><a href="index.php?action=listPosts">Accueil</a></li>
+   <li class="recettes"><a href="index.php?action=add">Recettes</a></li>
+   <li class="profil"><a href="index.php?action=profil&amp;id='.($_SESSION['id']).'">Profil</a></li>
+   <li class="inscription"><a href="index.php?action=subscribe">Connexion</a></li>
+   <li class="admin"><a href="index.php?action=admin">Admin</a></li>
+   </ul>
+   </nav>';
+
+  }else{
+ echo'  <nav><ul>
 <li class="accueil"><a href="index.php?action=listPosts">Accueil</a></li>
 <li class="recettes"><a href="index.php?action=add">Recettes</a></li>
-<li class="profil"><a href="index.php?action=profil&amp;id=<?php echo $_SESSION['id']?>">Profil</a></li>
+<li class="profil"><a href="index.php?action=profil&amp;id='.($_SESSION['id']).'">Profil</a></li>
 <li class="inscription"><a href="index.php?action=subscribe">Connexion</a></li>
 </ul>
-</nav>
+</nav>';
+  }?>
+
 <h1>Le blog de Joce</h1>
 <?= $content?>
   <footer>
-    
+    <p class="pdp1">Les données météo de la ville de Nantes</p>
+   <div class="meteo">
+    <p id="pdp"></p>
+    <p id="pdp2"></p>
+</div>
     </footer>
    
-    <script src="public/js/intro.js"> </script>
+    <script src="public/js/ajax.js"> </script>
    
 </body>
 </html>

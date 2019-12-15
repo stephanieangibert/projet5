@@ -5,6 +5,8 @@ use app\model\MemberManager;
 use app\model\PostManager;
  */
  require('controller/frontend.php');
+ require('controller/backend.php');
+
 //require('controller/backend.php');
 try {
     if (isset($_GET['action'])) {
@@ -20,12 +22,13 @@ try {
     }
      
      else if($_GET['action']=='add'){
+        addRecipe();
          
-         addRecipe();
+        
      }
      else if($_GET['action']=='profil'){
         if (isset($_GET['id']) && $_GET['id'] > 0){
-            profil($_GET['id']);
+            
             changeProfile($_GET['id']);
         }
     
@@ -34,14 +37,24 @@ try {
         }    
        
     }
+    else if($_GET['action']=='change'){
+        if (isset($_GET['id']) && $_GET['id'] > 0){
+            
+            profil($_GET['id']);
+        }
+              
+    }
     else if($_GET['action']=='love') {
         if(isset($_GET['id']) && $_GET['id']>0 ){
             heart($_GET['id']);
         }
       
     }
+    else if($_GET['action']=='admin'){
+        addElements();        
    
 }
+    }
 else{
     listPosts();
 

@@ -45,8 +45,8 @@
     <p style="color: red;" id="erreur2"></p>
 </form>
 <?php 
-         if(isset($erreur)){
-            echo '<div id="averti" ><font color="white">'. $erreur.'</font></div>'; }?> 
+         if(isset($erreur)):
+            echo '<div id="averti" ><font color="white">'. $erreur.'</font></div>';endif;?> 
 
 <script src="public/js/registrationInscrip.js"> </script>
 <script src="public/js/connexion.js"> </script>

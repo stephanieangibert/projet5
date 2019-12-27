@@ -11,7 +11,7 @@ function listPosts()
     $managerP=new PostManager();   
     $nbrRecipe=$managerP->totalRecipes();   
     $RecipePerPage =2;
-   $allPages = ceil($nbrRecipe/$RecipePerPage);   
+    $allPages = ceil($nbrRecipe/$RecipePerPage);   
   
     if(isset($_GET['listPosts']) AND !empty($_GET['listPosts']) AND $_GET['listPosts'] > 0 AND $_GET['listPosts'] <= $allPages) {
       $_GET['listPosts'] = intval($_GET['listPosts']);
@@ -20,32 +20,14 @@ function listPosts()
       $currentPage = 1;
    }   
    $begin = ($currentPage-1)*$RecipePerPage;
-   $pseudo=$managerP->join(); 
-   $posts=$managerP->getPosts($begin,$RecipePerPage);
-    
-    
-    
+   // $pseudo=$managerP->join(); 
+   $posts=$managerP->getPosts($begin,$RecipePerPage);   
        
     require('view/frontend/listPostsView.php');
     
 }
-/* function addRecipe(){
-    if(isset($_POST['submitAdd'])){
-        $title=htmlspecialchars($_POST['title']);
-        $ingredients=htmlspecialchars($_POST['ingredients']);
-        $content=htmlspecialchars($_POST['content']); 
-        $id_user=$_SESSION['id'];
-        $love=0;
-        $photo=0;      
-      
-        if(!empty($title)&&!empty($ingredients)&&!empty($content)){
-            $Post=new PostManager();
-            $addReci=$Post->add($title,$ingredients,$content,$id_user,$love,$photo);
-        }
-    }
-    require('view/frontend/listPost.php');
-} */
-function addRecipe(){
+
+ function addRecipe(){
    if(isset($_POST['submitAdd'])){
          if(isset($_FILES['photo']) && !empty($_FILES['photo']['name']) && !empty($_POST['title']) && !empty($_POST['ingredients']) && !empty($_POST['content'])){
             $tailleMax = 2097152;
@@ -53,17 +35,19 @@ function addRecipe(){
             $title=htmlspecialchars($_POST['title']);
             $ingredients=htmlspecialchars($_POST['ingredients']);
             $content=htmlspecialchars($_POST['content']);
-            $id_user=$_SESSION['id'];           
-            $love=0;
+            $id_user=$_SESSION['id'];            
+            $statut=0;
             if($_FILES['photo']['size'] <= $tailleMax){
                $extensionUpload = strtolower(substr(strrchr($_FILES['photo']['name'], '.'), 1));
                if(in_array($extensionUpload, $extensionsValides)){
-                   $chemin = "member/photo/".$_SESSION['id'].".".$extensionUpload;
+                   $chemin = "member/photo/".$_POST['title'].".".$extensionUpload;
                    $resultat = move_uploaded_file($_FILES['photo']['tmp_name'], $chemin);
                       if($resultat){
-                       $photo=$_SESSION['id'].".".$extensionUpload;
+                        $photo=0;
+                       $photo=$_POST['title'].".".$extensionUpload;
                        $Post=new PostManager();
-                       $addReci=$Post->add($title,$ingredients,$content,$id_user,$love,$photo);
+                       $addReci=$Post->add($title,$ingredients,$content,$id_user,$photo,$statut);
+                       $erreur="Votre recette est enregistrée !";
                       }
                       else{
                        $msg = "Erreur durant l'importation de votre photo de recette";
@@ -75,23 +59,65 @@ function addRecipe(){
                $msg = "Votre photo de recette ne doit pas dépasser 2Mo";
             }
                 
-         }else{if(!empty($title)&&!empty($ingredients)&&!empty($content)){
+         }else{if(!empty($_POST['title'])&&!empty($_POST['ingredients'])&&!empty($_POST['content'])){
            $title=htmlspecialchars($_POST['title']);
            $ingredients=htmlspecialchars($_POST['ingredients']);
            $content=htmlspecialchars($_POST['content']); 
-           $id_user=$_SESSION['id'];
-           $love=0;
-           $photo="";      
+           $id_user=$_SESSION['id'];           
+           $photo="";
+           $statut=0;      
            $Post=new PostManager();
-           $addReci=$Post->add($title,$ingredients,$content,$id_user,$love,$photo);
+           $addReci=$Post->add($title,$ingredients,$content,$id_user,$photo,$statut);
+           $erreur="Votre recette est enregistrée !";
          }           
 
          }
    }
    require('view/frontend/listPost.php');
-}
+}   
+
+
 function subscribe()
 {
+   if(isset($_POST['submit2'])){     
+      $mailconnect = htmlspecialchars($_POST['email']);   
+      $mdpconnect=htmlspecialchars($_POST['password']); 
+        if(isset($mailconnect) AND !empty($mdpconnect)) {    
+           $memberM=new MemberManager();
+
+         $userexist= $memberM->mailConnex($mailconnect);        
+                      
+                 if($userexist->rowCount() == 1) {                
+               
+                 $userinfo=$userexist->fetch();
+                  if(password_verify($mdpconnect,$userinfo['password'])){               
+                     $_SESSION['pseudo'] = $userinfo['pseudo'];                   
+                     $_SESSION['id']=$userinfo['id']; 
+                     $_SESSION['admin']=$userinfo['admin'];
+                     $_SESSION['email']=$userinfo['email'];                
+                     $erreur='Vous êtes connectés !'; 
+                    
+                  }  
+                 
+                  else{ 
+                   $erreur='Mauvais mail ou mot de passe !';             
+             
+                  }                                
+      
+                } else {
+                  $erreur="Mauvais mail ou mot de passe !"; 
+              
+                
+                 }
+            
+           
+                } else {
+                  $erreur="Tous les champs doivent être complétés !"; 
+                
+    }  
+  
+   }  
+ 
    
      if(isset($_POST['submit'])){
         
@@ -228,73 +254,35 @@ function subscribe()
 
 
   
-function connexion()
-{
-   if(isset($_POST['submit2'])){     
-      $mailconnect = htmlspecialchars($_POST['email']);   
-      $mdpconnect=htmlspecialchars($_POST['password']); 
-        if(isset($mailconnect) AND !empty($mdpconnect)) {    
-           $memberM=new MemberManager();
 
-         $userexist= $memberM->mailConnex($mailconnect);        
-                      
-                 if($userexist->rowCount() == 1) {                
-               
-                 $userinfo=$userexist->fetch();
-                  if(password_verify($mdpconnect,$userinfo['password'])){               
-                     $_SESSION['pseudo'] = $userinfo['pseudo'];                   
-                     $_SESSION['id']=$userinfo['id']; 
-                     $_SESSION['admin']=$userinfo['admin'];
-                     $_SESSION['email']=$userinfo['email'];                
-                     $erreur='Vous êtes connectés !'; 
-                    
-                  }  
-                 
-                  else{ 
-                   $erreur='Mauvais mail ou mot de passe !';             
-             
-                  }                                
-      
-                } else {
-                  $erreur="Mauvais mail ou mot de passe !"; 
-              
-                
-                 }
-            
-           
-                } else {
-                  $erreur="Tous les champs doivent être complétés !"; 
-                
-    }  
-  
-   }  
- 
-}
-
-
-
-
-function addComment($id){
+function addOnePost($id){
    $post=new PostManager();
-   $postCom=$post->getPost($id);
+   $postOne=$post->getPost($id);
+   $reqCom=$post->comments($id);
    require('view/frontend/listComments.php');
 }
-function heart($id){
-  /*  if(!empty($_SESSION['pseudo'])){
-      $playing = true;
-      if ($playing) {
-         $postAlo=new PostManager();
-         $addLo=$postAlo->addLove($id);
-     } else {
-      $postMin=new PostManager();
-      $addMi=$postMin->minLove($id);
-     }
-    $playing=!$playing;
-      
+function addComment($comment,$id_pseudo,$id_recipe){
+   $com=new PostManager();
+   $postCom=$com->getCom($comment,$id_pseudo,$id_recipe);
+   if ($postCom === false) {
+      throw new Exception('Impossible d\'ajouter le commentaire !');
+  }
+  else {
+   header('location:index.php?action=post&id='.$id_recipe);
+  }  
+
+}
+
+
+function heart($id,$id_user){ 
+   $point=new PostManager();
+   $pointH=$point->point($id,$id_user);  
+
+   if($pointH->rowCount()==1){   
+      $postAlo=new PostManager();
+      $addLo=$postAlo->addLove($id,$id_user);
    }
-    */
- 
-   header('location:index.php'); 
-   $postAlo=new PostManager();
-   $addLo=$postAlo->addLove($id);
+      
+      
+   header('location:index.php');    
 }

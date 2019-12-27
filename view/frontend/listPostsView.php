@@ -1,19 +1,25 @@
 <?php ob_start();?>
 
-<?php if(isset($_SESSION['pseudo'])){
-   echo' <p class="ajout"><a href="index.php?action=add">Ajouter une recette <i class="fas fa-pen-nib"></i></a></p>';
+<?php if(isset($_SESSION['pseudo'])):?>
+ <p class="ajout"><a href="index.php?action=add">Ajouter une recette <i class="fas fa-pen-nib"></i></a></p>
+ <?php endif ?>
     
 
-}
 
-while ($data = $posts->fetch())
-{
-    ?>
+
+<?php while ($data = $posts->fetch()):?>
+
+    
 <div class="news" id="chapitres" >
     <div class="pseud">
- 
-     
-  
+       <?php if($data['avatar']!=""):
+          echo'<img class="avatarPs" src="member/avatars/'.$data['avatar'].'">';
+        endif;?>
+        
+      
+       <h3>
+    <?php echo htmlspecialchars($data['pseudo']); ?>     
+      </h3>
     <h3 class="titre">
         <?php echo htmlspecialchars($data['title']); ?>     
        
@@ -29,9 +35,9 @@ while ($data = $posts->fetch())
              <?php                   
                    echo nl2br($data['content']); ?>   
                     </p> 
-                  <?php if($data['photo']!=""){
+                  <?php if($data['photo']!=""):
               echo'<div><p class="photoRecette"> <img class="photoRe"src="member/photo/'.$data['photo'].'"></p></div>';
-                  } ?>
+                  endif; ?>
      
                     <div class="comment" ><a href="index.php?action=post&amp;id=<?php echo $data['id'] ?>">Commentaires</a><a href="index.php?action=love&amp;id=<?php echo$data['id'];?>"><i class="fas fa-thumbs-up"></i></a></div>
              
@@ -40,10 +46,10 @@ while ($data = $posts->fetch())
       
 </div>
 
-<?php
-} 
+               <?php endwhile; ?>
 
-$posts->closeCursor();?>
+
+<?$posts->closeCursor();?>
 
 <div class="pagination">
 <?php

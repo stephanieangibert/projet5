@@ -13,3 +13,16 @@ function addElements(){
     require('view/backend/admin.php');
 
 }
+function acceptRecipe($id){
+    $accept=New PostManager();
+    $accRe=$accept->displayAcceptRecipe($id);
+    header('location:index.php?action=admin');
+
+}
+function  deleteRecipe($id)
+{
+   $del=new PostManager();
+   $delRecipe=$del->displayDeleteRecipe($id);
+   header('location:index.php?action=admin');
+   
+}

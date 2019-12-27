@@ -55,13 +55,16 @@ li {
 .profil{
     background-color: yellow;
 }
+.admin{
+    background-color: chartreuse;
+}
 h1{
     font-family:'digory_doodlesregular';
     text-align: center;
     padding-top: 5%;
     font-size: 222%;
     color: white;
-    height: 132px;
+    height: 102px;
 }
 #chapitres{
     text-align: center;
@@ -75,9 +78,10 @@ h1{
 .ingredients{
     background-color: grey;
     width: 400px;
-    margin: 0 auto;
-    height: 40px;    
+    margin: 0 auto;    
     padding-top: 2%;
+    border-top-left-radius:25px;
+    border-top-right-radius:25px;
 }
 #chapitres a{
     color:red;
@@ -125,22 +129,18 @@ select{
 td{
     color:white;
 }
-#inscription {
-    /* Uniquement centrer le formulaire sur la page */
+#inscription {    
     margin: 2% auto;
-    width: 500px;
-    /* Encadré pour voir les limites du formulaire */
+    width: 500px;  
     padding: 3em;
     border: 1px solid #CCC;
     border-radius: 1em;
     color:white;
     font-weight: bold;
   }
-  #connexion {
-    /* Uniquement centrer le formulaire sur la page */
+  #connexion {  
     margin: 0 auto;
     width: 500px;
-    /* Encadré pour voir les limites du formulaire */
     padding: 3em;
     border: 1px solid #CCC;
     border-radius: 1em;
@@ -148,11 +148,10 @@ td{
     font-weight: bold;
     position: absolute;
     left:30%;
-    top:60%;
+    top:70%;
 
   }
-  label {
-    /* Pour être sûrs que toutes les étiquettes ont même taille et sont correctement alignées */
+  label {    
     display: inline-block;
     width: 110px;
     text-align: right;
@@ -222,7 +221,8 @@ td{
       display: flex;
       flex-direction: row;
       justify-content: space-around;
-      align-items: baseline;
+      margin: 2% 0;
+     
   }
   .photo{
       width: 150px;
@@ -268,7 +268,8 @@ td{
       border-bottom-right-radius: 40px;
 	  border-top-right-radius: 40px;
 	  border-bottom-left-radius: 40px;
-	  border-top-left-radius: 40px;
+      border-top-left-radius: 40px;
+     margin: 2%;
   }
   .photoRe{
       width: 70%;
@@ -296,9 +297,97 @@ td{
     background-color: green;
 
   }
+  .btn3{
+    width: 30px;
+    color:white;
+    background-color:orangered;
+
+  }
   #pdp{
       color:white;
+      padding-left: 7%;
+      padding-right: 5%;
   }
   .pdp1{
     color:white;
+   
   }
+  footer{
+      border-top:solid red;
+      margin-top: 3%;
+  }
+  .meteo{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+  }
+  .avatarPs{
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+  }
+  p.avatar{
+      width: 200px;
+  }
+  .commentaires{
+      width: 220px;
+      color:red;
+      font-weight: bold;
+      padding: 2% 0%;
+      text-align: center;
+  }
+  .auteur{
+      color:white;
+  }
+  .textcommentaire{
+      color:white;
+  }
+  .com{
+      text-align: center;
+  }
+  #message{
+      color:white;
+      background-color: red;
+      border-bottom-right-radius: 40px;
+	  border-top-right-radius: 40px;
+	  border-bottom-left-radius: 40px;
+      border-top-left-radius: 40px;
+      width: 250px;
+      height: 40px;
+      text-align: center;
+      font-weight: bold;
+       position: absolute;
+      top:50%;
+      left: 40%; 
+      padding:0.5%;
+  }
+  .ttesLesRecettes{
+      color:white;
+      font-weight: bold;
+      background-color: blue;
+      width: 300px;
+      height: 50px;      
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom-right-radius: 40px;
+	  border-top-right-radius: 40px;
+	  border-bottom-left-radius: 40px;
+      border-top-left-radius: 40px;
+  }
+  #signal{
+    background-color: blue;
+    width: 300px;
+    height: 50px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-right-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    border-top-left-radius: 40px;      
+
+  }
+  

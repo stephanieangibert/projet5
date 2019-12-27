@@ -5,7 +5,7 @@ request.onreadystatechange = function() {
         console.log(response.current_condition.condition);
         console.log(response);
         document.getElementById("pdp").innerHTML=response.current_condition.condition;
-        document.getElementById("pdp2").image=response.current_condition.icon;
+        document.getElementById("pdp2").src=response.current_condition.icon;
     }
 };
 request.open("GET", "https://www.prevision-meteo.ch/services/json/nantes");

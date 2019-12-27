@@ -1,7 +1,7 @@
 <?php ob_start(); ?> 
 
 <p class="ajout">Pour modifier votre profil</p>
-<?php while($data=$Prof->fetch()){ 
+<?php while($data=$Prof->fetch()): 
     echo'
     <form action="index.php?action=change&amp;id='.$data['id'].'" method="post" id="profil" enctype="multipart/form-data">
     <div>
@@ -35,7 +35,7 @@
  
 </form>
 ';
-}?>
+ endwhile;?>
 
 
 <?php $content = ob_get_clean(); ?>
